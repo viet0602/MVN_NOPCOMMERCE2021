@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Nop Commerce" parallel="false">
+	<listeners>
+		<listener class-name="commons.MethodListener" />
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener
+			class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test name="Run on Firefox">
+		<parameter name="browser" value="firefox" />
+		<classes>
+		    <class name="testCases.Register_06" />
+			<class name="testCases.Search_AdvantageSearch_11" />
+		</classes>
+	</test>
+</suite> 

@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.File;
 import java.util.Random;
 
 public class GlobalConstants {
@@ -10,7 +11,8 @@ public class GlobalConstants {
 	public static String newpassword = "234567";
 	public static String firstName = "Nguyen";
 	public static String lastName = "Minh" + randomNumber();
-
+	
+	
 	public static int randomNumber() {
 		Random rand = new Random();
 		return rand.nextInt(999999);

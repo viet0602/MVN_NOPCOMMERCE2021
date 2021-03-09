@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.File;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -24,6 +26,31 @@ public abstract class AbstractTest {
 	// Contructor: Khoi tao log dau tien khi goi den abstractTest
 	protected AbstractTest() {
 		log = LogFactory.getLog(getClass());
+	}
+
+	protected WebDriver getDriver() {
+		return driver;
+	}
+
+	@BeforeSuite
+	public void deleteAllFilesInReportNGScreenshot() {
+		System.out.println("-------Start delete file in folder------------");
+		deleteAllFilesInFolder();
+		System.out.println("-------End delete file in folder------------");
+
+	}
+
+	public void deleteAllFilesInFolder() {
+		String workingDir = System.getProperty("user.dir");
+		String pathFolderDownload = workingDir + "\\ReportNGScreenshots";
+		File file = new File(pathFolderDownload);
+		File[] listOfFiles = file.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				System.out.println(listOfFiles[i].getName());
+				new File(listOfFiles[i].toString()).delete();
+			}
+		}
 	}
 
 	protected WebDriver getBrowserDriver(String browserName) {
@@ -135,6 +162,7 @@ public abstract class AbstractTest {
 	protected boolean verifyEquals(Object actual, Object expected) {
 		return checkEquals(actual, expected);
 	}
+
 	public int randomNumber() {
 		Random rand = new Random();
 		return rand.nextInt(999999);
